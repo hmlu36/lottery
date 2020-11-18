@@ -1,13 +1,11 @@
-name: deploy gh-pageson:
+name: deploy gh-pages:
   push:
     branches:
-      - masterjobs:
+      - main:
   build:
     name: Build and deploy gh-pages
     env:
       MY_SECRET   : ${{secrets.commit_secret}}
-      USER_NAME   : githubaction
-      USER_EMAIL  : githubaction@fake.com
       PUBLISH_DIR : ./dist
     runs-on: ubuntu-latest
     strategy:
