@@ -6,6 +6,8 @@ name: deploy gh-pages:
     name: Build and deploy gh-pages
     env:
       MY_SECRET   : ${{secrets.commit_secret}}
+      USER_NAME   : Joshua.lu
+      USER_EMAIL  : hmlu36@gmail.com
       PUBLISH_DIR : ./dist
     runs-on: ubuntu-latest
     strategy:
