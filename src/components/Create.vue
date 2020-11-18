@@ -37,7 +37,7 @@ export default {
         .add(this.lottery)
         .then(() => {
           alert("新增成功!");
-          this.$router.push('/list')
+          this.$router.push("/list");
         })
         .catch((error) => {
           console.log(error);
