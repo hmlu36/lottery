@@ -1,49 +1,43 @@
---- 
-name: "deploy gh-pages"
-true: 
-  build: 
-    env: 
-      MY_SECRET: "${{secrets.commit_secret}}"
-      PUBLISH_DIR: ./dist
-      USER_EMAIL: hmlu36@gmail.com
-      USER_NAME: joshua.lu
-    name: "Build and deploy gh-pages"
+name: deploy gh-pages
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build and deploy gh-pages
+    env:
+      MY_SECRET   : ${{secrets.commit_secret}}
+      USER_NAME   : joshua.lu
+      USER_EMAIL  : hmlu36@gmail.com
+      PUBLISH_DIR : ./dist
     runs-on: ubuntu-latest
-    steps: 
-      - 
-        uses: actions/checkout@v1
-      - 
-        name: "Use Node.js ${{ matrix.node-version }}"
-        uses: actions/setup-node@v1
-        with: 
-          node-version: "${{ matrix.node-version }}"
-      - 
-        name: "npm install"
-        run: "npm install\n"
-      - 
-        name: "npm run build"
-        run: |
-            npm run gulp m
-            npm run build
-      - 
-        name: "Commit files"
-        run: |-
-            cd $PUBLISH_DIR
-            git init
-            git config --local user.name $USER_NAME
-            git config --local user.email $USER_EMAIL
-            git status
-            git remote add origin https://$MY_SECRET@github.com/$GITHUB_REPOSITORY.git
-            git checkout -b gh-pages
-            git add --all
-            git commit -m "deploy to Github pages"
-            git push origin gh-pages -f
-            echo 🤘 deploy gh-pages complete.
-    strategy: 
-      matrix: 
-        node-version: 
-          - 10.x
-  push: 
-    branches: 
-      - 
-        main: ~
+    strategy:
+      matrix:
+        node-version: [10.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install
+      run: |
+        npm install
+    - name: npm run build
+      run: |
+        npm run gulp m
+        npm run build
+    - name: Commit files
+      run: |
+        cd $PUBLISH_DIR
+        git init
+        git config --local user.name $USER_NAME
+        git config --local user.email $USER_EMAIL
+        git status
+        git remote add origin https://$MY_SECRET@github.com/$GITHUB_REPOSITORY.git
+        git checkout -b gh-pages
+        git add --all
+        git commit -m "deploy to Github pages"
+        git push origin gh-pages -f
+        echo 🤘 deploy gh-pages complete.
