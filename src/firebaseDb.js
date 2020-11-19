@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-
+/*
 const firebaseConfig = {
     apiKey: "AIzaSyDM0QRhxR7kLgZUXOhzz1R8l3zCER1ZrVY",
     authDomain: "lottery-3c582.firebaseapp.com",
@@ -11,24 +11,19 @@ const firebaseConfig = {
     appId: "1:693340419747:web:f2643e073474e663367116",
     measurementId: "G-W9LPGKREYP"
 };
-
-/*
-import * as dotenv from 'dotenv';
-
-
-dotenv.config();
-
-const firebaseConfig = {
-    apiKey: process.env.APIKEY,
-    authDomain: `${process.env.DOMAIN}.firebaseapp.com`,
-    databaseURL: `https://${process.env.DOMAIN}.firebaseio.com`,
-    projectId: `${process.env.DOMAIN}`,
-    storageBucket: `${process.env.DOMAIN}.appspot.com`,
-    messagingSenderId: `${process.env.MESSAGINGSENDERID}`,
-    appId: `${process.env.APPID}`,
-    measurementId: `${process.env.MEASUREMENTID}`
-};
 */
+const firebaseConfig = {
+    apiKey: process.env.VUE_APP_APIKEY,
+    authDomain: `${process.env.VUE_APP_DOMAIN}.firebaseapp.com`,
+    databaseURL: `https://${process.env.VUE_APP_DOMAIN}.firebaseio.com`,
+    projectId: `${process.env.VUE_APP_DOMAIN}`,
+    storageBucket: `${process.env.VUE_APP_DOMAIN}.appspot.com`,
+    messagingSenderId: `${process.env.VUE_APP_MESSAGINGSENDERID}`,
+    appId: `${process.env.VUE_APP_APPID}`,
+    measurementId: `${process.env.VUE_APP_MEASUREMENTID}`
+};
+
+console.log('env', JSON.stringify(process.env));
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const db = firebaseApp.firestore();
