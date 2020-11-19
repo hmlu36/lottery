@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-/*
+
 const firebaseConfig = {
     apiKey: "AIzaSyDM0QRhxR7kLgZUXOhzz1R8l3zCER1ZrVY",
     authDomain: "lottery-3c582.firebaseapp.com",
@@ -11,7 +11,7 @@ const firebaseConfig = {
     appId: "1:693340419747:web:f2643e073474e663367116",
     measurementId: "G-W9LPGKREYP"
 };
-*/
+/*
 const firebaseConfig = {
     apiKey: process.env.VUE_APP_APIKEY,
     authDomain: `${process.env.VUE_APP_DOMAIN}.firebaseapp.com`,
@@ -22,7 +22,7 @@ const firebaseConfig = {
     appId: `${process.env.VUE_APP_APPID}`,
     measurementId: `${process.env.VUE_APP_MEASUREMENTID}`
 };
-
+*/
 console.log('env', JSON.stringify(process.env));
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
