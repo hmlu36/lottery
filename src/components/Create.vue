@@ -1,4 +1,4 @@
-<template >
+<template>
   <div class="row justify-content-center">
     <div class="col-md-5">
       <h3 class="text-center">新增獎品</h3>
@@ -8,7 +8,7 @@
           <input
             type="text"
             class="form-control"
-            v-model.trim="lottery.name"
+            v-model.trim="lottery"
             required
           />
         </div>
@@ -22,17 +22,26 @@
 </template>
 
 <script>
-import { db } from "../firebaseDb";
+import { db } from '../firebaseDb';
 
 export default {
   data() {
     return {
-      lottery: {},
+      lottery: ""
     };
   },
   methods: {
-    onFormSubmit(event) {
-      event.preventDefault();
+    onFormSubmit() {
+      db.ref(`/lotteries`)
+        .push(this.lottery)
+        .then(() => {
+          alert('建立成功');
+          this.lottery = "";
+        })
+        .catch(() => {
+          alert('伺服器發生錯誤，請稍後再試');
+        });
+      /*
       db.collection("lotteries")
         .add(this.lottery)
         .then(() => {
@@ -42,8 +51,22 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+        */
+    },
+    _uuid() {
+      let d = Date.now();
+      if (
+        typeof performance !== 'undefined' &&
+        typeof performance.now === 'function'
+      ) {
+        d += performance.now(); //use high-precision timer if available
+      }
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        const r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+      });
     },
   },
 };
 </script>
-
