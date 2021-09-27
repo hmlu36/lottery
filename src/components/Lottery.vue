@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--
     <carousel>
       <slide v-for="(lottery, index) in lotteries" v-bind:key="index">
         <div class="card-warp">
@@ -18,18 +19,34 @@
         </div>
       </slide>
     </carousel>
+    -->
+
+    <div class="card-deck">
+      <div class="card" v-for="(lottery, index) in lotteries" v-bind:key="index">
+          <div class="card-front"></div>
+          <div class="card-back">
+            <span :style="'color:' + pokerStyle[index % 4].color"
+              ><strong>{{ lottery.name }}</strong></span
+            >
+            <img :src="pokerStyle[index % 4].link" />
+            <span :style="'color:' + pokerStyle[index % 4].color"
+              ><strong>{{ lottery.name }}</strong></span
+            >
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { db } from '../firebaseDb';
-import { Carousel, Slide } from 'vue-carousel';
+//import { Carousel, Slide } from 'vue-carousel';
 
 export default {
-  components: {
+  /*components: {
     Carousel,
     Slide,
-  },
+  },*/
   data() {
     return {
       lotteries: [],
